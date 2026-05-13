@@ -1,32 +1,15 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createStaticNavigation } from '@react-navigation/native';
+import { Provider } from 'react-redux';
 
-import LoginScreen from './src/components/pages/LoginScreen';
-import RegistrationScreen from './src/components/pages/RegistrationScreen';
-
-const RootStack = createNativeStackNavigator({
-  initialRouteName: 'Login',
-  screens: {
-    Login: {
-      screen: LoginScreen,
-      options: {
-        headerShown: false,
-      },
-    },
-    Registration: {
-      screen: RegistrationScreen,
-      options: {
-        title: 'регистрация',
-      },
-    },
-  },
-});
-
-const Navigation = createStaticNavigation(RootStack);
+import AppNavigator from './src/navigation/AppNavigator';
+import { store } from './src/store';
 
 function App() {
-  return <Navigation />;
+  return (
+    <Provider store={store}>
+      <AppNavigator />
+    </Provider>
+  );
 }
 
 export default App;
