@@ -1,45 +1,32 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStaticNavigation } from '@react-navigation/native';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import LoginScreen from './src/components/pages/LoginScreen';
+import RegistrationScreen from './src/components/pages/RegistrationScreen';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+const RootStack = createNativeStackNavigator({
+  initialRouteName: 'Login',
+  screens: {
+    Login: {
+      screen: LoginScreen,
+      options: {
+        headerShown: false,
+      },
+    },
+    Registration: {
+      screen: RegistrationScreen,
+      options: {
+        title: 'регистрация',
+      },
+    },
   },
 });
+
+const Navigation = createStaticNavigation(RootStack);
+
+function App() {
+  return <Navigation />;
+}
 
 export default App;
