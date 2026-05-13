@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    color: '#fff',
+    color: 'white',
     fontSize: 16,
+    fontFamily: 'Geologica-Light',
   },
 });
