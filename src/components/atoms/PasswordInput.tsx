@@ -77,7 +77,6 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  // Show label when focused or when there's text
   const showLabel = isFocused || value.length > 0;
 
   return (

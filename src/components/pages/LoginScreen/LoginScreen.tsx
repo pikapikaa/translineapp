@@ -11,6 +11,8 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FastImage from 'react-native-fast-image';
 import CheckBox from '@react-native-community/checkbox';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
 import { useAppDispatch } from '../../../store/hooks';
 import { signIn } from '../../../store/slices/authSlice';
@@ -20,10 +22,21 @@ import { TranslinePressable } from '../../atoms/Pressables';
 import { palette } from '../../theme/colors';
 import PasswordInput from '../../atoms/PasswordInput';
 import Spacing from '../../atoms/Spacing';
+import { PhoneInput } from '../../atoms/PhoneInput';
+import { phoneSchema } from '../../../utils/schemas';
 
 const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm({
+    resolver: zodResolver(phoneSchema(false)), // true для +7
+    defaultValues: { phone: '' },
+  });
 
   const dispatch = useAppDispatch();
 
@@ -82,6 +95,7 @@ const LoginScreen = () => {
         </View>
 
         <View style={styles.inputContainer}>
+          <PhoneInput name="phone" withCountryCode={false} control={control} />
           <PasswordInput value={password} onChangeText={setPassword} />
 
           <View style={styles.checkboxContainer}>
@@ -107,8 +121,11 @@ const LoginScreen = () => {
           </View>
 
           <TranslinePressable
-            onPress={onLoginHandler}
-            style={{ backgroundColor: palette.BLUE_LIGHT }}
+            onPress={handleSubmit(onLoginHandler)}
+            style={{
+              backgroundColor: isValid ? palette.blue : palette.BLUE_LIGHT,
+            }}
+            disabled={!isValid}
           >
             <Text style={styles.buttonText}>Войти</Text>
           </TranslinePressable>
