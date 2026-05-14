@@ -20,6 +20,13 @@ export const textStyles = StyleSheet.create({
     lineHeight: 24 * 1.2,
     color: palette.GRAY_800,
   },
+  text_10l: {
+    fontSize: 10,
+    fontFamily: 'Geologica-Light',
+    padding: 0,
+    lineHeight: 10 * 1.4,
+    color: palette.GRAY_800,
+  },
   text_14m: {
     fontSize: 14,
     fontFamily: 'Geologica-Medium',

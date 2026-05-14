@@ -10,6 +10,7 @@ import { bootstrapAsync } from '../store/slices/authSlice';
 import LoginScreen from '../components/pages/LoginScreen';
 import RegistrationScreen from '../components/pages/RegistrationScreen';
 import MainScreen from '../components/pages/MainScreen';
+import { TabNavigator } from './TabNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,7 +42,7 @@ export default function AppNavigator() {
           </>
         ) : (
           // Экран доступен ТОЛЬКО авторизованным пользователям
-          <Stack.Screen name="Main" component={MainScreen} />
+          <Stack.Screen name="Main" component={TabNavigator} />
         )}
       </Stack.Navigator>
     </NavigationContainer>
