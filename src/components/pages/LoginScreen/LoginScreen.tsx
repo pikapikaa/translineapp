@@ -46,13 +46,21 @@ const LoginScreen = () => {
         ToastAndroid.SHORT,
       );
     } else {
-      Alert.alert('Переход к политике конфиденциальности!');
+      Alert.alert('Переход к политике конфиденциальности.');
+    }
+  };
+
+  const onForgetPasswordHandler = () => {
+    if (Platform.OS === 'android') {
+      ToastAndroid.show('Переход к восстановлению пароля.', ToastAndroid.SHORT);
+    } else {
+      Alert.alert('Переход к восстановлению пароля!');
     }
   };
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <FastImage
           style={styles.image}
           source={require('../../../assets/images/logo.png')}
@@ -114,7 +122,21 @@ const LoginScreen = () => {
             </Pressable>
           </View>
         </View>
-      </ScrollView>
+
+        <View style={styles.footerContainer}>
+          <Pressable onPress={onForgetPasswordHandler}>
+            <Text style={{ ...textStyles.text_16l, color: palette.blue }}>
+              Забыли пароль
+            </Text>
+          </Pressable>
+          <View style={{ alignItems: 'center' }}>
+            <Text style={textStyles.text_16l}> Появились вопросы?</Text>
+            <Text style={textStyles.text_16b}>
+              телефон поддержки: +7 (999) 999-99-99
+            </Text>
+          </View>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -138,4 +160,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   privacyContainer: { flexDirection: 'row', alignItems: 'center' },
+  footerContainer: {
+    alignItems: 'center',
+    marginTop: 20,
+    gap: 16,
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 20,
+  },
 });

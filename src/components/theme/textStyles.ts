@@ -42,4 +42,11 @@ export const textStyles = StyleSheet.create({
     lineHeight: 16 * 1.2,
     color: palette.BLACK_REGULAR,
   },
+  text_16b: {
+    fontSize: 16,
+    fontFamily: 'Geologica-Bold',
+    padding: 0,
+    lineHeight: 16 * 1.2,
+    color: palette.BLACK_REGULAR,
+  },
 });
