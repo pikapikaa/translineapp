@@ -3,7 +3,6 @@ import {
   Text,
   View,
   StyleSheet,
-  ScrollView,
   Alert,
   Pressable,
   ToastAndroid,
@@ -20,6 +19,7 @@ import DashedLine from '../../../assets/icons/DashedLine';
 import { TranslinePressable } from '../../atoms/Pressables';
 import { palette } from '../../theme/colors';
 import PasswordInput from '../../atoms/PasswordInput';
+import Spacing from '../../atoms/Spacing';
 
 const LoginScreen = () => {
   const [password, setPassword] = useState('');
@@ -67,7 +67,7 @@ const LoginScreen = () => {
           resizeMode={FastImage.resizeMode.contain}
         />
 
-        <View style={{ height: 28 }} />
+        <Spacing height={28} />
 
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Личный кабинет Transline</Text>
@@ -129,7 +129,7 @@ const LoginScreen = () => {
               Забыли пароль
             </Text>
           </Pressable>
-          <View style={{ alignItems: 'center' }}>
+          <View style={styles.support}>
             <Text style={textStyles.text_16l}> Появились вопросы?</Text>
             <Text style={textStyles.text_16b}>
               телефон поддержки: +7 (999) 999-99-99
@@ -168,4 +168,5 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     marginBottom: 20,
   },
+  support: { alignItems: 'center' },
 });
