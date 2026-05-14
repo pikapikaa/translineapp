@@ -13,6 +13,28 @@ export const textStyles = StyleSheet.create({
     lineHeight: 24 * 1.3,
     color: palette.BLACK,
   },
+
+  text_14m: {
+    fontSize: 14,
+    fontFamily: 'Geologica-Medium',
+    padding: 0,
+    lineHeight: 14 * 1.2,
+    color: palette.BLACK_REGULAR,
+  },
+  text_14l: {
+    fontSize: 14,
+    fontFamily: 'Geologica-Light',
+    padding: 0,
+    lineHeight: 14 * 1.2,
+    color: palette.BLACK_REGULAR,
+  },
+  text_16l: {
+    fontSize: 16,
+    fontFamily: 'Geologica-Light',
+    padding: 0,
+    lineHeight: 24,
+    color: palette.BLACK_REGULAR,
+  },
   text_16r: {
     fontSize: 16,
     fontFamily: 'Geologica-Regular',

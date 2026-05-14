@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  Alert,
+  Pressable,
+  ToastAndroid,
+  Platform,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FastImage from 'react-native-fast-image';
+import CheckBox from '@react-native-community/checkbox';
 
 import { useAppDispatch } from '../../../store/hooks';
 import { signIn } from '../../../store/slices/authSlice';
@@ -13,10 +23,31 @@ import PasswordInput from '../../atoms/PasswordInput';
 
 const LoginScreen = () => {
   const [password, setPassword] = useState('');
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
   const dispatch = useAppDispatch();
 
   const onLoginHandler = () => {
     dispatch(signIn({ email: 'sdfsdf', token: 'sdfdsfds' }));
+  };
+
+  const onRegisterHandler = () => {
+    if (Platform.OS === 'android') {
+      ToastAndroid.show('Переход к регистрации!', ToastAndroid.SHORT);
+    } else {
+      Alert.alert('Переход к регистрации.');
+    }
+  };
+
+  const onOpenPrivacyPolicyHandler = () => {
+    if (Platform.OS === 'android') {
+      ToastAndroid.show(
+        'Переход к политике конфиденциальности.',
+        ToastAndroid.SHORT,
+      );
+    } else {
+      Alert.alert('Переход к политике конфиденциальности!');
+    }
   };
 
   return (
@@ -44,12 +75,44 @@ const LoginScreen = () => {
 
         <View style={styles.inputContainer}>
           <PasswordInput value={password} onChangeText={setPassword} />
+
+          <View style={styles.checkboxContainer}>
+            <CheckBox
+              tintColors={{
+                true: palette.blue,
+                false: palette.GRAY_LIGHT,
+              }}
+              disabled={false}
+              value={toggleCheckBox}
+              onValueChange={newValue => setToggleCheckBox(newValue)}
+            />
+            <View style={styles.privacyContainer}>
+              <Pressable onPress={() => setToggleCheckBox(!toggleCheckBox)}>
+                <Text style={textStyles.text_14m}>Согласен с </Text>
+              </Pressable>
+              <Pressable onPress={onOpenPrivacyPolicyHandler}>
+                <Text style={styles.underline}>
+                  политикой конфиденциальности
+                </Text>
+              </Pressable>
+            </View>
+          </View>
+
           <TranslinePressable
             onPress={onLoginHandler}
             style={{ backgroundColor: palette.BLUE_LIGHT }}
           >
             <Text style={styles.buttonText}>Войти</Text>
           </TranslinePressable>
+
+          <View style={styles.register}>
+            <Text style={textStyles.text_16l}>Нет аккаунта? </Text>
+            <Pressable onPress={onRegisterHandler}>
+              <Text style={{ ...textStyles.text_16l, color: palette.blue }}>
+                Зарегистрируйтесь
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -67,4 +130,12 @@ const styles = StyleSheet.create({
   spacing: { marginVertical: 20 },
   buttonText: { ...textStyles.text_16r, color: 'white' },
   inputContainer: { paddingHorizontal: 16, gap: 16 },
+  checkboxContainer: { flexDirection: 'row', alignItems: 'center', gap: 3 },
+  underline: { ...textStyles.text_14l, textDecorationLine: 'underline' },
+  register: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  privacyContainer: { flexDirection: 'row', alignItems: 'center' },
 });
