@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text } from 'react-native';
+
 import MainScreen from '../components/pages/MainScreen';
 import OrdersScreen from '../components/pages/OrdersScreen';
 import NotificationsScreen from '../components/pages/NotificationsScreen';
@@ -8,7 +8,6 @@ import ProfileScreen from '../components/pages/ProfileScreen';
 import OrderCreateScreen from '../components/pages/OrderCreateScreen';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { palette } from '../components/theme/colors';
-import { textStyles } from '../components/theme/textStyles';
 
 // Инициализируем без передачи объекта конфигурации
 const Tab = createBottomTabNavigator();
@@ -19,8 +18,7 @@ export const TabNavigator = () => {
       screenOptions={{
         tabBarActiveTintColor: palette.GRAY_800,
         tabBarInactiveTintColor: palette.GRAY_400,
-
-        headerShown: true,
+        headerShown: false,
         tabBarLabelStyle: {
           fontSize: 10,
           fontFamily: 'Geologica-Light',

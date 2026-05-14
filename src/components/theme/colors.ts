@@ -12,6 +12,8 @@ export const palette = {
   GREEN_500: 'rgba(0, 201, 80, 1)',
   GRAY_300: 'rgba(201, 202, 204, 1)',
   GRAY_400: 'rgba(175, 175, 180, 1)',
+  BLUE_500: 'rgba(43, 127, 255, 1)',
+  BLUE_50: 'rgba(239, 246, 255, 1)',
 };
 
 export const colors = {

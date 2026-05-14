@@ -6,6 +6,13 @@ export const normalize = size => {
 };
 
 export const textStyles = StyleSheet.create({
+  text_20s: {
+    fontSize: 20,
+    fontFamily: 'Geologica-SemiBold',
+    padding: 0,
+    lineHeight: 24 * 1.2,
+    color: palette.GRAY_800,
+  },
   text_24b: {
     fontSize: 24,
     fontFamily: 'Geologica-SemiBold',
@@ -25,6 +32,13 @@ export const textStyles = StyleSheet.create({
     fontFamily: 'Geologica-Light',
     padding: 0,
     lineHeight: 10 * 1.4,
+    color: palette.GRAY_800,
+  },
+  text_12l: {
+    fontSize: 12,
+    fontFamily: 'Geologica-Light',
+    padding: 0,
+    lineHeight: 16,
     color: palette.GRAY_800,
   },
   text_14m: {
