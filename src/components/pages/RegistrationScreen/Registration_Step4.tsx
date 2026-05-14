@@ -11,9 +11,12 @@ import { palette } from '../../theme/colors';
 import Spacing from '../../atoms/Spacing';
 import { EnhancedPasswordInput } from '../../atoms/EnhancedPasswordInput';
 import { passwordStepSchema } from '../../../utils/schemas';
+import { signIn } from '../../../store/slices/authSlice';
+import { useAppDispatch } from '../../../store/hooks';
 
 const Registration_Step_4 = () => {
   const { bottom } = useSafeAreaInsets();
+  const dispatch = useAppDispatch();
 
   const {
     control,
@@ -57,7 +60,9 @@ const Registration_Step_4 = () => {
       isValid: /[!@#$%^&*(),.?":{}|<>_+\-[\]\\]/.test(passwordValue),
     },
   ];
-  const onProfileSubmitHandler = () => {};
+  const onProfileSubmitHandler = () => {
+    dispatch(signIn({ email: 'sdfsdf', token: 'sdfdsfds' }));
+  };
 
   return (
     <ScrollView
