@@ -8,7 +8,9 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
-import { FontAwesomeFreeSolid } from '@react-native-vector-icons/fontawesome-free-solid';
+import Icon from '@react-native-vector-icons/ionicons';
+import { palette } from '../theme/colors';
+import { textStyles } from '../theme/textStyles';
 
 interface PasswordInputProps {
   value: string;
@@ -19,6 +21,7 @@ interface PasswordInputProps {
   labelStyle?: TextStyle;
   errorStyle?: TextStyle;
   placeholder?: string;
+  showErrors?: boolean;
 }
 
 const PasswordInput: React.FC<PasswordInputProps> = ({
@@ -27,9 +30,9 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
   onValidationChange,
   style,
   inputStyle,
-  labelStyle,
   errorStyle,
-  placeholder = 'Enter password',
+  placeholder = 'Пароль',
+  showErrors = false,
 }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -79,19 +82,13 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
 
   return (
     <View style={[styles.container, style]}>
-      {showLabel && <Text style={[styles.label, labelStyle]}>Password</Text>}
-      <View
-        style={[
-          styles.inputContainer,
-          isFocused && styles.inputContainerFocused,
-        ]}
-      >
+      <View style={[styles.inputContainer]}>
         <TextInput
           style={[styles.input, inputStyle]}
           value={value}
           onChangeText={handleTextChange}
           placeholder={!showLabel ? placeholder : ''}
-          placeholderTextColor="#999"
+          placeholderTextColor={palette.GRAY_500}
           secureTextEntry={!isPasswordVisible}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
@@ -103,14 +100,14 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
           style={styles.eyeButton}
           activeOpacity={0.7}
         >
-          <FontAwesomeFreeSolid
-            name={isPasswordVisible ? 'eye' : 'eye-slash'}
+          <Icon
+            name={isPasswordVisible ? 'eye-outline' : 'eye-off-outline'}
             size={24}
-            color="black"
+            color={palette.GRAY_800}
           />
         </TouchableOpacity>
       </View>
-      {errors.length > 0 && (
+      {errors.length > 0 && showErrors ? (
         <View style={styles.errorContainer}>
           {errors.map((error, index) => (
             <Text key={index} style={[styles.errorText, errorStyle]}>
@@ -118,7 +115,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
             </Text>
           ))}
         </View>
-      )}
+      ) : null}
     </View>
   );
 };
@@ -126,31 +123,19 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    marginBottom: 16,
-  },
-  label: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#333',
-    marginBottom: 8,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
+    borderRadius: 16,
     backgroundColor: '#fff',
     overflow: 'hidden',
   },
-  inputContainerFocused: {
-    borderColor: '#007AFF',
-    borderWidth: 2,
-  },
   input: {
+    ...textStyles.text_16r,
     flex: 1,
     paddingHorizontal: 12,
-    paddingVertical: 12,
+    paddingVertical: 3,
     fontSize: 16,
     color: '#000',
   },

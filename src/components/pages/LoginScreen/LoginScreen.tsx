@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FastImage from 'react-native-fast-image';
@@ -9,8 +9,10 @@ import { textStyles } from '../../theme/textStyles';
 import DashedLine from '../../../assets/icons/DashedLine';
 import { TranslinePressable } from '../../atoms/Pressables';
 import { palette } from '../../theme/colors';
+import PasswordInput from '../../atoms/PasswordInput';
 
 const LoginScreen = () => {
+  const [password, setPassword] = useState('');
   const dispatch = useAppDispatch();
 
   const onLoginHandler = () => {
@@ -41,6 +43,7 @@ const LoginScreen = () => {
         </View>
 
         <View style={styles.inputContainer}>
+          <PasswordInput value={password} onChangeText={setPassword} />
           <TranslinePressable
             onPress={onLoginHandler}
             style={{ backgroundColor: palette.BLUE_LIGHT }}
@@ -56,12 +59,12 @@ const LoginScreen = () => {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1 },
+  safeArea: { flex: 1, backgroundColor: palette.BG },
   container: { flex: 1 },
   titleContainer: { gap: 12, paddingHorizontal: 16 },
   image: { width: 72, height: 72, marginLeft: 16, marginTop: 8 },
   title: { ...textStyles.text_24b, textTransform: 'uppercase' },
   spacing: { marginVertical: 20 },
   buttonText: { ...textStyles.text_16r, color: 'white' },
-  inputContainer: { paddingHorizontal: 16 },
+  inputContainer: { paddingHorizontal: 16, gap: 16 },
 });
