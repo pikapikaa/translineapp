@@ -13,6 +13,7 @@ import FastImage from 'react-native-fast-image';
 import CheckBox from '@react-native-community/checkbox';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from '../../../store/hooks';
 import { signIn } from '../../../store/slices/authSlice';
@@ -29,6 +30,7 @@ import { useNavigation } from '@react-navigation/native';
 const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const { t, i18n } = useTranslation();
 
   const navigation = useNavigation();
 
@@ -82,7 +84,7 @@ const LoginScreen = () => {
         <Spacing height={28} />
 
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Личный кабинет Transline</Text>
+          <Text style={styles.title}>{t('personal_account')}</Text>
           <Text style={textStyles.text_16r}>
             Для входа в личный кабинет введите свой номер телефона, на него
             будет отправлено SMS с проверочным кодом

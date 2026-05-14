@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 
 import AppNavigator from './src/navigation/AppNavigator';
 import { store } from './src/store';
+import './src/localization/i118n';
 
 function App() {
   return (

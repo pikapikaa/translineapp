@@ -57,7 +57,9 @@ const RegistrationScreen = () => {
           onBackPressHadler(currenPage);
         }}
       />
+
       <Spacing height={40} />
+
       <View style={styles.slider}>
         {[1, 2, 3, 4].map((item, index) => (
           <View

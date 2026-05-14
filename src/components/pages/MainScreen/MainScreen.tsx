@@ -7,6 +7,7 @@ import {
   Pressable,
   ScrollView,
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Ionicons from '@react-native-vector-icons/ionicons';
@@ -25,6 +26,7 @@ const images = [
 
 const MainScreen = () => {
   const { top } = useSafeAreaInsets();
+  const { i18n } = useTranslation();
 
   const renderItem = ({ item }) => {
     return (
@@ -41,13 +43,20 @@ const MainScreen = () => {
     );
   };
 
+  const toggleLanguage = () => {
+    const nextLanguage = i18n.language === 'ru' ? 'en' : 'ru';
+    i18n.changeLanguage(nextLanguage);
+  };
+
   return (
     <View style={[styles.container]}>
       <ScrollView contentContainerStyle={{ paddingTop: top }}>
         <View style={styles.header}>
           <Text style={styles.headerText}>IP Fenix</Text>
           <View style={styles.rightHeader}>
-            <Text style={styles.headerText}>KAZ</Text>
+            <Text style={styles.headerText} onPress={toggleLanguage}>
+              {i18n.language.toUpperCase()}
+            </Text>
             <Ionicons name="headset-outline" size={24} color="white" />
           </View>
         </View>
