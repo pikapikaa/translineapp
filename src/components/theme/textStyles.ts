@@ -49,4 +49,11 @@ export const textStyles = StyleSheet.create({
     lineHeight: 16 * 1.2,
     color: palette.BLACK_REGULAR,
   },
+  text_16m: {
+    fontSize: 16,
+    fontFamily: 'Geologica-Medium',
+    padding: 0,
+    lineHeight: 16 * 1.2,
+    color: palette.GRAY_800,
+  },
 });

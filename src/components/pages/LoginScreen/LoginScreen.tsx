@@ -24,10 +24,13 @@ import PasswordInput from '../../atoms/PasswordInput';
 import Spacing from '../../atoms/Spacing';
 import { PhoneInput } from '../../atoms/PhoneInput';
 import { phoneSchema } from '../../../utils/schemas';
+import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
+  const navigation = useNavigation();
 
   const {
     control,
@@ -45,11 +48,7 @@ const LoginScreen = () => {
   };
 
   const onRegisterHandler = () => {
-    if (Platform.OS === 'android') {
-      ToastAndroid.show('Переход к регистрации!', ToastAndroid.SHORT);
-    } else {
-      Alert.alert('Переход к регистрации.');
-    }
+    navigation.navigate('Registration');
   };
 
   const onOpenPrivacyPolicyHandler = () => {
