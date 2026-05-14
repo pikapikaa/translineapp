@@ -79,3 +79,28 @@ export const profileSchema = z
       }
     }
   });
+
+export const passwordStepSchema = z
+  .object({
+    password: z
+      .string()
+      .min(1, 'Пароль обязателен для заполнения')
+      .min(8, 'Пароль должен быть не менее 8 символов')
+      .regex(/[A-Z]/, 'Пароль должен содержать минимум 1 заглавную букву')
+      .regex(/[a-z]/, 'Пароль должен содержать минимум 1 строчную букву')
+      .regex(/[0-9]/, 'Пароль должен содержать минимум 1 цифру')
+      .regex(
+        /[!@#$%^&*(),.?":{}|<>_+\-[\]\\]/,
+        'Пароль должен содержать минимум 1 специальный символ',
+      ),
+    confirmPassword: z.string().min(1, 'Подтверждение пароля обязательно'),
+  })
+  .superRefine(({ password, confirmPassword }, ctx) => {
+    if (password !== confirmPassword) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['confirmPassword'], // Ошибка подсветит поле повтора пароля
+        message: 'Пароли не совпадают',
+      });
+    }
+  });
