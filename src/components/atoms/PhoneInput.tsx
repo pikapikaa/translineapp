@@ -44,7 +44,6 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 15,
     width: '100%',
   },
   input: {

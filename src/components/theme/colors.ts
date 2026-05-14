@@ -8,6 +8,7 @@ export const palette = {
   GRAY_500: 'rgba(120, 120, 132, 1)',
   GRAY_800: 'rgba(27, 22, 49, 1)',
   GRAY_LIGHT: 'rgba(217, 217, 217, 1)',
+  GRAY_200: 'rgba(225, 225, 225, 1)',
 };
 
 export const colors = {

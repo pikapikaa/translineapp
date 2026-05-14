@@ -5,12 +5,18 @@ interface AuthState {
   userToken: string | null;
   isLoading: boolean;
   user: { email: string } | null;
+  draft?: {
+    phone?: string;
+    password?: string;
+    code?: string;
+  };
 }
 
 const initialState: AuthState = {
   userToken: null,
   isLoading: true,
   user: null,
+  draft: { phone: '', password: '', code: '' },
 };
 
 // Асинхронный экшен для восстановления токена при запуске приложения
@@ -38,6 +44,12 @@ const authSlice = createSlice({
       state.isLoading = false;
       AsyncStorage.removeItem('userToken');
     },
+    updateDraftForm: (state, action) => {
+      state.draft = { ...state.draft, ...action.payload };
+    },
+    clearDraftForm: state => {
+      state.draft = { phone: '', password: '', code: '' };
+    },
   },
   extraReducers: builder => {
     builder
@@ -51,5 +63,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { signIn, signOut } = authSlice.actions;
+export const { signIn, signOut, updateDraftForm, clearDraftForm } =
+  authSlice.actions;
 export default authSlice.reducer;

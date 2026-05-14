@@ -13,7 +13,13 @@ export const textStyles = StyleSheet.create({
     lineHeight: 24 * 1.3,
     color: palette.BLACK,
   },
-
+  text_24bold: {
+    fontSize: 24,
+    fontFamily: 'Geologica-Bold',
+    padding: 0,
+    lineHeight: 24 * 1.2,
+    color: palette.GRAY_800,
+  },
   text_14m: {
     fontSize: 14,
     fontFamily: 'Geologica-Medium',
