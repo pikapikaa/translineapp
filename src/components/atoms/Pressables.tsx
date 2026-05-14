@@ -1,13 +1,29 @@
 import React from 'react';
-import { Text, StyleSheet, Pressable } from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  type PressableProps,
+  type View,
+} from 'react-native';
 import { useLinkProps } from '@react-navigation/native';
+
 import { palette } from '../theme/colors';
 
 type TranslineButtonProps = Parameters<typeof useLinkProps>[0] & {
   children: React.ReactNode;
 };
+type TTranslinePressable = PressableProps & React.RefAttributes<View>;
 
-const TranslineButton = ({
+export const TranslinePressable = ({ ...props }: TTranslinePressable) => {
+  return (
+    <Pressable {...props} style={[styles.container, { ...props.style }]}>
+      {props.children}
+    </Pressable>
+  );
+};
+
+export const TranslineLink = ({
   screen,
   params,
   action,
@@ -17,13 +33,11 @@ const TranslineButton = ({
 }: TranslineButtonProps) => {
   const linkProps = useLinkProps({ screen, params, action, href });
   return (
-    <Pressable {...linkProps} {...rest} style={styles.container}>
+    <Pressable {...linkProps} {...rest}>
       <Text style={styles.text}>{children}</Text>
     </Pressable>
   );
 };
-
-export default TranslineButton;
 
 const styles = StyleSheet.create({
   container: {

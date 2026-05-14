@@ -3,6 +3,7 @@ export const palette = {
   red: '#B00020',
   BLACK: 'rgba(37, 37, 38, 1)',
   BLACK_REGULAR: 'rgba(69, 69, 69, 1)',
+  BLUE_LIGHT: 'rgba(157, 232, 247, 1)',
 };
 
 export const colors = {

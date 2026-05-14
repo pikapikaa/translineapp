@@ -14,7 +14,7 @@ export const textStyles = StyleSheet.create({
     color: palette.BLACK,
   },
   text_16r: {
-    fontSize: normalize(16),
+    fontSize: 16,
     fontFamily: 'Geologica-Regular',
     padding: 0,
     lineHeight: 16 * 1.2,
