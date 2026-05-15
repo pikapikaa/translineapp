@@ -38,20 +38,44 @@ export const codeSchema = z.object({
   code: z.string().min(4, 'Код должен быть не менее 4 символов'),
 });
 
+const dateSchema = z.preprocess(val => {
+  if (typeof val === 'string') {
+    if (val.trim().length === 0) return undefined;
+    return new Date(val);
+  }
+  return val;
+}, z.date({ required_error: 'Укажите дату рождения' }));
+
+const docIssueDateSchema = z.preprocess(val => {
+  if (typeof val === 'string') {
+    if (val.trim().length === 0) return undefined;
+    return new Date(val);
+  }
+  return val;
+}, z.date({ required_error: 'Укажите дату выдачи документа' }));
+
+const driverLicenseDateSchema = z.preprocess(val => {
+  if (typeof val === 'string') {
+    if (val.trim().length === 0) return undefined;
+    return new Date(val);
+  }
+  return val;
+}, z.date({ required_error: 'Укажите дату выдачи ВУ' }).optional());
+
 export const profileSchema = z
   .object({
     fullName: z.string().min(1, 'ФИО обязательно для заполнения'),
-    birthDate: z.date({ required_error: 'Укажите дату рождения' }),
+    birthDate: dateSchema,
     citizenship: z.string().min(1, 'Выберите гражданство'),
     iin: z.string().min(1, 'ИИН обязателен'),
     // .refine(validateIIN, { message: 'Некорректный ИИН' }),
     docNumber: z.string().min(1, 'Номер удостоверения обязателен'),
-    docIssueDate: z.date({ required_error: 'Укажите дату выдачи документа' }),
+    docIssueDate: docIssueDateSchema,
     docIssuedBy: z.string().min(1, 'Укажите, кем выдано'),
     isCarrier: z.boolean().default(false),
     driverLicense: z.string().optional(),
     driverCategory: z.string().optional(),
-    driverLicenseDate: z.date().optional(),
+    driverLicenseDate: driverLicenseDateSchema,
   })
   .superRefine((data, ctx) => {
     if (data.isCarrier) {
@@ -98,7 +122,7 @@ export const passwordStepSchema = z
     if (password !== confirmPassword) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        path: ['confirmPassword'], // Ошибка подсветит поле повтора пароля
+        path: ['confirmPassword'],
         message: 'Пароли не совпадают',
       });
     }

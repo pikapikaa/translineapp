@@ -43,9 +43,9 @@ const Registration_Step_3 = () => {
       isCarrier: draft?.isCarrier || false,
       driverLicense: draft?.driverLicense || '',
       driverCategory: draft?.driverCategory || '',
-      docIssueDate: draft?.docIssueDate || '',
-      birthDate: draft?.birthDate || '',
-      driverLicenseDate: draft?.driverLicenseDate || '',
+      docIssueDate: draft?.docIssueDate || undefined,
+      birthDate: draft?.birthDate || undefined,
+      driverLicenseDate: draft?.driverLicenseDate || undefined,
     },
     mode: 'onChange',
   });
@@ -120,6 +120,8 @@ const Registration_Step_3 = () => {
     currentDriverLicenseDate,
     dispatch,
   ]);
+
+  console.log(currentBirthDate);
 
   const onProfileSubmitHandler = () => {
     navigation.navigate('Registration_Step4');

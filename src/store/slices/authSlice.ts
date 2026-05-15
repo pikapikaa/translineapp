@@ -4,7 +4,21 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 interface AuthState {
   userToken: string | null;
   isLoading: boolean;
-  user: { email: string } | null;
+  user: {
+    email: string;
+    phone?: string;
+    fullName?: string;
+    citizenship?: string;
+    iin?: string;
+    docNumber?: string;
+    docIssuedBy?: string;
+    isCarrier?: boolean;
+    driverLicense?: string;
+    driverCategory?: string;
+    docIssueDate?: Date;
+    birthDate?: Date;
+    driverLicenseDate?: Date;
+  } | null;
   draft?: {
     phone?: string;
     fullName?: string;
@@ -41,7 +55,6 @@ const initialState: AuthState = {
   },
 };
 
-// Асинхронный экшен для восстановления токена при запуске приложения
 export const bootstrapAsync = createAsyncThunk('auth/bootstrap', async () => {
   const token = await AsyncStorage.getItem('userToken');
   return token;
@@ -53,10 +66,32 @@ const authSlice = createSlice({
   reducers: {
     signIn: (
       state,
-      action: PayloadAction<{ token: string; email: string }>,
+      action: PayloadAction<{
+        token: string;
+        email: string;
+        isNewUser?: boolean;
+      }>,
     ) => {
       state.userToken = action.payload.token;
       state.user = { email: action.payload.email };
+      if (action.payload.isNewUser) {
+        state.user = { ...state.user, ...state.draft };
+        state.draft = {
+          phone: '',
+          fullName: '',
+          citizenship: '',
+          iin: '',
+          docNumber: '',
+          docIssuedBy: '',
+          isCarrier: false,
+          driverLicense: '',
+          driverCategory: '',
+          docIssueDate: undefined,
+          birthDate: undefined,
+          driverLicenseDate: undefined,
+        };
+      }
+
       state.isLoading = false;
       AsyncStorage.setItem('userToken', action.payload.token);
     },
