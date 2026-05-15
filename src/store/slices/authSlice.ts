@@ -16,7 +16,7 @@ const initialState: AuthState = {
   userToken: null,
   isLoading: true,
   user: null,
-  draft: { phone: '', password: '', code: '' },
+  draft: { phone: '', password: '' },
 };
 
 // Асинхронный экшен для восстановления токена при запуске приложения
@@ -48,7 +48,7 @@ const authSlice = createSlice({
       state.draft = { ...state.draft, ...action.payload };
     },
     clearDraftForm: state => {
-      state.draft = { phone: '', password: '', code: '' };
+      state.draft = { phone: '', password: '' };
     },
   },
   extraReducers: builder => {

@@ -9,8 +9,7 @@ import { codeSchema } from '../../../utils/schemas';
 import { TranslinePressable } from '../../atoms/Pressables';
 import { palette } from '../../theme/colors';
 import { textStyles } from '../../theme/textStyles';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { updateDraftForm } from '../../../store/slices/authSlice';
+import { useAppSelector } from '../../../store/hooks';
 import Spacing from '../../atoms/Spacing';
 import { OtpInput } from '../../molecules/OtpInput';
 
@@ -18,22 +17,17 @@ const Registration_Step_2 = () => {
   const navigation = useNavigation();
   const { bottom } = useSafeAreaInsets();
 
-  const dispatch = useAppDispatch();
   const { draft } = useAppSelector(state => state.auth);
 
   const {
     control,
-    getValues,
     handleSubmit,
     formState: { isValid },
   } = useForm({
     resolver: zodResolver(codeSchema),
-    defaultValues: { code: draft?.code || '' },
   });
 
   const onCodeSubmitHandler = () => {
-    const currentCode = getValues('code');
-    dispatch(updateDraftForm({ code: currentCode || '' }));
     navigation.navigate('Registration_Step3');
   };
 
