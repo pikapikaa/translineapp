@@ -55,8 +55,9 @@ export const TabNavigator = () => {
         options={{
           title: 'Создать заказ',
           tabBarIcon: ({ color }) => (
-            <Ionicons name="add-circle" size={20} color={color} />
+            <Ionicons name="add-circle" size={20} color={palette.blue} />
           ),
+          tabBarLabelStyle: { color: palette.blue },
         }}
       />
 
