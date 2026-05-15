@@ -6,6 +6,7 @@ import './src/localization/i118n';
 
 import AppNavigator from './src/navigation/AppNavigator';
 import { store, persistor } from './src/store';
+import { palette } from './src/components/theme/colors';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <PersistGate
         loading={
           <View style={{ flex: 1, justifyContent: 'center' }}>
-            <ActivityIndicator />
+            <ActivityIndicator size="large" color={palette.blue} />
           </View>
         }
         persistor={persistor}

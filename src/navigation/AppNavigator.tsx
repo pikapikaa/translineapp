@@ -11,6 +11,7 @@ import LoginScreen from '../components/pages/LoginScreen';
 import RegistrationScreen from '../components/pages/RegistrationScreen';
 import { TabNavigator } from './TabNavigator';
 import i18n from '../localization/i118n';
+import { palette } from '../components/theme/colors';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,7 +44,7 @@ export default function AppNavigator() {
   if (isLoading || !isLangReady) {
     return (
       <View style={styles.indicator}>
-        <ActivityIndicator size="large" color="#6200EE" />
+        <ActivityIndicator size="large" color={palette.blue} />
       </View>
     );
   }
