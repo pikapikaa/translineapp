@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  list: { flexGrow: 0, marginBottom: 10 },
+  list: { flexGrow: 0, marginBottom: 20 },
   listContent: { gap: 10 },
   modalView: {
     margin: 20,
