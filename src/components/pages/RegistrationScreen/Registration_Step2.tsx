@@ -7,20 +7,23 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { codeSchema } from '../../../utils/schemas';
 import { textStyles } from '../../theme/textStyles';
-import { useAppSelector } from '../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import Spacing from '../../atoms/Spacing';
 import { OtpInput } from '../../molecules/OtpInput';
 import ButtonTimer from '../../atoms/ButtonTimer';
+import { updateDraftForm } from '../../../store/slices/authSlice';
 
 const Registration_Step_2 = () => {
   const navigation = useNavigation();
   const { bottom } = useSafeAreaInsets();
 
+  const dispatch = useAppDispatch();
   const { draft } = useAppSelector(state => state.auth);
 
   const {
     control,
     formState: { isValid },
+    getValues,
   } = useForm({
     resolver: zodResolver(codeSchema),
     mode: 'onChange',
@@ -28,9 +31,10 @@ const Registration_Step_2 = () => {
 
   useEffect(() => {
     if (isValid) {
+      dispatch(updateDraftForm({ code: getValues('code') }));
       navigation.navigate('Registration_Step3');
     }
-  }, [isValid, navigation]);
+  }, [isValid, navigation, dispatch, getValues]);
 
   return (
     <View style={[styles.container, { paddingBottom: bottom }]}>

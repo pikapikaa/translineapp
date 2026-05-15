@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ViewStyle } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -12,6 +12,7 @@ import Registration_Step4 from './Registration_Step4';
 import { palette } from '../../theme/colors';
 import Header from '../../molecules/Header';
 import Spacing from '../../atoms/Spacing';
+import { useAppSelector } from '../../../store/hooks';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,11 +20,16 @@ const RegistrationScreen = () => {
   const [currenPage, setCurrentPage] = useState(1);
   const { top } = useSafeAreaInsets();
   const navigation = useNavigation();
+  const { draft } = useAppSelector(state => state.auth);
+
+  const hasDraft = draft?.code !== '';
 
   const onBackPressHadler = (index: number) => {
     switch (index) {
       case 1:
-        navigation?.goBack();
+        navigation.canGoBack()
+          ? navigation.goBack()
+          : navigation.navigate('SignIn');
         break;
       case 2:
         navigation.navigate('Registration', {
@@ -50,7 +56,9 @@ const RegistrationScreen = () => {
       <Header
         title="Регистрация"
         onClose={() => {
-          navigation?.goBack();
+          navigation.canGoBack()
+            ? navigation.goBack()
+            : navigation.navigate('SignIn');
         }}
         style={{ paddingHorizontal: 16 }}
         onPrevious={() => {
@@ -73,7 +81,9 @@ const RegistrationScreen = () => {
       </View>
 
       <Stack.Navigator
-        initialRouteName="Registration_Step_One"
+        initialRouteName={
+          hasDraft ? 'Registration_Step3' : 'Registration_Step_One'
+        }
         screenOptions={{
           animation: 'none',
           headerShown: false,

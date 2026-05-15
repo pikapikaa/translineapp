@@ -31,6 +31,7 @@ interface AuthState {
     docIssueDate?: Date;
     birthDate?: Date;
     driverLicenseDate?: Date;
+    code?: string;
   };
 }
 
@@ -51,6 +52,7 @@ const initialState: AuthState = {
     docIssueDate: undefined,
     birthDate: undefined,
     driverLicenseDate: undefined,
+    code: '',
   },
 };
 
@@ -88,6 +90,7 @@ const authSlice = createSlice({
           docIssueDate: undefined,
           birthDate: undefined,
           driverLicenseDate: undefined,
+          code: '',
         };
       }
 
