@@ -4,5 +4,11 @@
   "personal_account": "Transline personal account",
   "login_start_text": "To log in to your personal account, enter your phone number; an SMS with a verification code will be sent to it.",
   "login": "Login",
-  "registration": "Registration"
+  "registration": "Registration",
+  "profile": "Profile",
+  "no_account": "No account?",
+  "go_register": "Register",
+  "forget_password": "Forgot password?",
+  "have_questions": "Have questions?",
+  "support_phone": "Support phone:"
 }

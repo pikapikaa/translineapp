@@ -138,10 +138,10 @@ const LoginScreen = () => {
           </TranslinePressable>
 
           <View style={styles.register}>
-            <Text style={textStyles.text_16l}>Нет аккаунта? </Text>
+            <Text style={textStyles.text_16l}>{t('no_account')} </Text>
             <Pressable onPress={onRegisterHandler}>
               <Text style={{ ...textStyles.text_16l, color: palette.blue }}>
-                Зарегистрируйтесь
+                {t('go_register')}
               </Text>
             </Pressable>
           </View>
@@ -150,13 +150,13 @@ const LoginScreen = () => {
         <View style={styles.footerContainer}>
           <Pressable onPress={onForgetPasswordHandler}>
             <Text style={{ ...textStyles.text_16l, color: palette.blue }}>
-              Забыли пароль
+              {t('forget_password')}
             </Text>
           </Pressable>
           <View style={styles.support}>
-            <Text style={textStyles.text_16l}> Появились вопросы?</Text>
+            <Text style={textStyles.text_16l}> {t('have_questions')}</Text>
             <Text style={textStyles.text_16b}>
-              телефон поддержки: +7 (999) 999-99-99
+              {t('support_phone')} +7 (999) 999-99-99
             </Text>
           </View>
         </View>

@@ -24,12 +24,15 @@ import { profileSchema } from '../../../utils/schemas';
 import { countries } from '../RegistrationScreen/Registration_Step3';
 import { TranslinePressable } from '../../atoms/Pressables';
 import { palette } from '../../theme/colors';
+import { useTranslation } from 'react-i18next';
 
 const ProfileScreen = () => {
   const dispatch = useAppDispatch();
   const { top } = useSafeAreaInsets();
 
   const { user } = useAppSelector(state => state.auth);
+
+  const { t } = useTranslation();
 
   const {
     control,
@@ -107,7 +110,7 @@ const ProfileScreen = () => {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.header}>
-          <Text style={textStyles.text_24bold}>Profile</Text>
+          <Text style={textStyles.text_24bold}>{t('profile')}</Text>
 
           <Pressable
             onPress={() => {

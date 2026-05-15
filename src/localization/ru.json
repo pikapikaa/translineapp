@@ -4,5 +4,11 @@
   "personal_account": "Личный кабинет Transline",
   "login_start_text": "Для входа в личный кабинет введите свой номер телефона, на него будет отправлено SMS с проверочным кодом",
   "login": "Войти",
-  "registration": "Регистрация"
+  "registration": "Регистрация",
+  "profile": "Профиль",
+  "no_account": "Нет аккаунта?",
+  "go_register": "Зарегистрируйтесь",
+  "forget_password": "Забыли пароль?",
+  "have_questions": "Есть вопросы?",
+  "support_phone": " телефон поддержки:"
 }
