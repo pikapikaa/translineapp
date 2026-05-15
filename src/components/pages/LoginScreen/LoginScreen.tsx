@@ -14,6 +14,7 @@ import CheckBox from '@react-native-community/checkbox';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
 
 import { useAppDispatch } from '../../../store/hooks';
 import { signIn } from '../../../store/slices/authSlice';
@@ -22,10 +23,9 @@ import DashedLine from '../../../assets/icons/DashedLine';
 import { TranslinePressable } from '../../atoms/Pressables';
 import { palette } from '../../theme/colors';
 import Spacing from '../../atoms/Spacing';
-import { PhoneInput } from '../../atoms/PhoneInput';
 import { loginSchema } from '../../../utils/schemas';
-import { useNavigation } from '@react-navigation/native';
 import { EnhancedPasswordInput } from '../../atoms/EnhancedPasswordInput';
+import { CustomPhoneInput } from '../../atoms/CustomPhoneInput';
 
 const LoginScreen = () => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
@@ -97,7 +97,11 @@ const LoginScreen = () => {
         </View>
 
         <View style={styles.inputContainer}>
-          <PhoneInput name="phone" withCountryCode={false} control={control} />
+          <CustomPhoneInput
+            name="phone"
+            withCountryCode={false}
+            control={control}
+          />
           <EnhancedPasswordInput
             name="password"
             control={control}
