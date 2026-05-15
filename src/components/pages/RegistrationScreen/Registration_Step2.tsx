@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -6,12 +6,11 @@ import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { codeSchema } from '../../../utils/schemas';
-import { TranslinePressable } from '../../atoms/Pressables';
-import { palette } from '../../theme/colors';
 import { textStyles } from '../../theme/textStyles';
 import { useAppSelector } from '../../../store/hooks';
 import Spacing from '../../atoms/Spacing';
 import { OtpInput } from '../../molecules/OtpInput';
+import ButtonTimer from '../../atoms/ButtonTimer';
 
 const Registration_Step_2 = () => {
   const navigation = useNavigation();
@@ -21,15 +20,17 @@ const Registration_Step_2 = () => {
 
   const {
     control,
-    handleSubmit,
     formState: { isValid },
   } = useForm({
     resolver: zodResolver(codeSchema),
+    mode: 'onChange',
   });
 
-  const onCodeSubmitHandler = () => {
-    navigation.navigate('Registration_Step3');
-  };
+  useEffect(() => {
+    if (isValid) {
+      navigation.navigate('Registration_Step3');
+    }
+  }, [isValid, navigation]);
 
   return (
     <View style={[styles.container, { paddingBottom: bottom }]}>
@@ -47,15 +48,7 @@ const Registration_Step_2 = () => {
       </View>
 
       <View style={styles.footer}>
-        <TranslinePressable
-          onPress={handleSubmit(onCodeSubmitHandler)}
-          style={{
-            backgroundColor: isValid ? palette.blue : palette.BLUE_LIGHT,
-          }}
-          disabled={!isValid}
-        >
-          <Text style={styles.buttonText}>Отправить код</Text>
-        </TranslinePressable>
+        <ButtonTimer />
       </View>
     </View>
   );
@@ -66,7 +59,6 @@ export default Registration_Step_2;
 const styles = StyleSheet.create({
   container: { flex: 1, paddingHorizontal: 16, paddingTop: 24 },
   textContainer: { gap: 4 },
-  buttonText: { ...textStyles.text_16r, color: 'white' },
   footer: {
     flex: 1,
     justifyContent: 'flex-end',
