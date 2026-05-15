@@ -1,6 +1,8 @@
 
 # Transline App
 
+apk download https://drive.google.com/file/d/16nbDfUQGFIrcXrtKuiR9qHo66OcXtoRk/view?usp=sharing
+
 Что сделано : 
 1) Вход в апп по номеру телефону и пароль
 
