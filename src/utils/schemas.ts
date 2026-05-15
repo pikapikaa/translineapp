@@ -66,7 +66,7 @@ export const profileSchema = z
     fullName: z.string().min(1, 'ФИО обязательно для заполнения'),
     birthDate: dateSchema,
     citizenship: z.string().min(1, 'Выберите гражданство'),
-    iin: z.string().length(12, 'ИИН обязателен, минимум 12 цифр'),
+    iin: z.string().length(12, 'ИИН обязателен, должен содержать 12 цифр'),
     docNumber: z.string().min(1, 'Номер удостоверения обязателен'),
     docIssueDate: docIssueDateSchema,
     docIssuedBy: z.string().min(1, 'Укажите, кем выдано'),
