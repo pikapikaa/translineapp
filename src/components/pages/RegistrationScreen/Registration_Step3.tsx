@@ -121,8 +121,6 @@ const Registration_Step_3 = () => {
     dispatch,
   ]);
 
-  console.log(currentBirthDate);
-
   const onProfileSubmitHandler = () => {
     navigation.navigate('Registration_Step4');
   };
