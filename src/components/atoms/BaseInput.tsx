@@ -65,5 +65,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   inputError: { borderColor: '#ff4d4f' },
-  errorText: { color: '#ff4d4f', fontSize: 11, marginTop: 2 },
+  errorText: {
+    ...textStyles.text_10l,
+    color: '#ff4d4f',
+    fontSize: 11,
+    marginTop: 2,
+  },
 });

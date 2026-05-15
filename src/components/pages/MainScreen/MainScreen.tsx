@@ -35,10 +35,7 @@ const MainScreen = () => {
 
   const renderItem = ({ item }) => {
     return (
-      <Pressable
-        //  onPress={() => onItemPress?.(item)}
-        style={styles.imageWrapper}
-      >
+      <Pressable style={styles.imageWrapper}>
         <FastImage
           source={{ uri: item }}
           style={styles.image}

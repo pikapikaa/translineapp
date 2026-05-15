@@ -9,7 +9,6 @@ import OrderCreateScreen from '../components/pages/OrderCreateScreen';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { palette } from '../components/theme/colors';
 
-// Инициализируем без передачи объекта конфигурации
 const Tab = createBottomTabNavigator();
 
 export const TabNavigator = () => {

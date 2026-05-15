@@ -1,28 +1,5 @@
 import { z } from 'zod';
 
-const validateIIN = (iin: string): boolean => {
-  if (!/^\d{12}$/.test(iin)) return false;
-
-  let sum = 0;
-  for (let i = 0; i < 11; i++) {
-    sum += parseInt(iin[i]) * (i + 1);
-  }
-  let digit = sum % 11;
-
-  if (digit === 10) {
-    sum = 0;
-    for (let i = 0; i < 11; i++) {
-      let weight = (i + 3) % 11;
-      if (weight === 0) weight = 11;
-      sum += parseInt(iin[i]) * weight;
-    }
-    digit = sum % 11;
-    if (digit === 10) digit = 0;
-  }
-
-  return digit === parseInt(iin);
-};
-
 export const phoneSchema = (withCountryCode: boolean) =>
   z.object({
     phone: z.string().refine(
@@ -89,8 +66,7 @@ export const profileSchema = z
     fullName: z.string().min(1, 'ФИО обязательно для заполнения'),
     birthDate: dateSchema,
     citizenship: z.string().min(1, 'Выберите гражданство'),
-    iin: z.string().min(1, 'ИИН обязателен'),
-    // .refine(validateIIN, { message: 'Некорректный ИИН' }),
+    iin: z.string().length(12, 'ИИН обязателен, минимум 12 цифр'),
     docNumber: z.string().min(1, 'Номер удостоверения обязателен'),
     docIssueDate: docIssueDateSchema,
     docIssuedBy: z.string().min(1, 'Укажите, кем выдано'),

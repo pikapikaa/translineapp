@@ -41,7 +41,6 @@ export const OtpInput: React.FC<ControlledOtpInputProps> = ({
           const updatedValue = newCodeArray.join('');
           onChange(updatedValue);
 
-          // Перемещение фокуса вперед при вводе символа
           if (cleanText && index < 3) {
             inputsRef.current[index + 1]?.focus();
           }

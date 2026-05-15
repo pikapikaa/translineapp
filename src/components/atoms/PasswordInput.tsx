@@ -38,7 +38,6 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
   const [isFocused, setIsFocused] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
 
-  // Validation rules
   const validatePassword = (password: string) => {
     const validationErrors = [];
 
