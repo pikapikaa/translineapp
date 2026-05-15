@@ -30,7 +30,7 @@ import { useNavigation } from '@react-navigation/native';
 const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const navigation = useNavigation();
 

@@ -7,7 +7,6 @@ interface AuthState {
   user: { email: string } | null;
   draft?: {
     phone?: string;
-    password?: string;
     fullName?: string;
     citizenship?: string;
     iin?: string;
@@ -28,7 +27,6 @@ const initialState: AuthState = {
   user: null,
   draft: {
     phone: '',
-    password: '',
     fullName: '',
     citizenship: '',
     iin: '',
@@ -74,7 +72,6 @@ const authSlice = createSlice({
     clearDraftForm: state => {
       state.draft = {
         phone: '',
-        password: '',
         fullName: '',
         citizenship: '',
         iin: '',
