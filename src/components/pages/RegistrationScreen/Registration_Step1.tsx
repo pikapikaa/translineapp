@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -24,17 +24,23 @@ const Registration_Step_1 = () => {
 
   const {
     control,
-    getValues,
     handleSubmit,
+    watch,
     formState: { isValid },
   } = useForm({
     resolver: zodResolver(phoneSchema(true)), // true для +7
     defaultValues: { phone: draft?.phone || '' },
   });
 
+  const currentPhone = watch('phone');
+
+  useEffect(() => {
+    if (currentPhone !== undefined) {
+      dispatch(updateDraftForm({ phone: currentPhone }));
+    }
+  }, [currentPhone, dispatch]);
+
   const onCodeSubmitHandler = () => {
-    const currentPhone = getValues('phone');
-    dispatch(updateDraftForm({ phone: currentPhone || '' }));
     navigation.navigate('Registration_Step2');
   };
 

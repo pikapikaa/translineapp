@@ -8,7 +8,17 @@ interface AuthState {
   draft?: {
     phone?: string;
     password?: string;
-    code?: string;
+    fullName?: string;
+    citizenship?: string;
+    iin?: string;
+    docNumber?: string;
+    docIssuedBy?: string;
+    isCarrier?: boolean;
+    driverLicense?: string;
+    driverCategory?: string;
+    docIssueDate?: Date;
+    birthDate?: Date;
+    driverLicenseDate?: Date;
   };
 }
 
@@ -16,7 +26,21 @@ const initialState: AuthState = {
   userToken: null,
   isLoading: true,
   user: null,
-  draft: { phone: '', password: '' },
+  draft: {
+    phone: '',
+    password: '',
+    fullName: '',
+    citizenship: '',
+    iin: '',
+    docNumber: '',
+    docIssuedBy: '',
+    isCarrier: false,
+    driverLicense: '',
+    driverCategory: '',
+    docIssueDate: undefined,
+    birthDate: undefined,
+    driverLicenseDate: undefined,
+  },
 };
 
 // Асинхронный экшен для восстановления токена при запуске приложения
@@ -48,7 +72,21 @@ const authSlice = createSlice({
       state.draft = { ...state.draft, ...action.payload };
     },
     clearDraftForm: state => {
-      state.draft = { phone: '', password: '' };
+      state.draft = {
+        phone: '',
+        password: '',
+        fullName: '',
+        citizenship: '',
+        iin: '',
+        docNumber: '',
+        docIssuedBy: '',
+        isCarrier: false,
+        driverLicense: '',
+        driverCategory: '',
+        docIssueDate: undefined,
+        birthDate: undefined,
+        driverLicenseDate: undefined,
+      };
     },
   },
   extraReducers: builder => {

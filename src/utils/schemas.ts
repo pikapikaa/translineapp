@@ -48,7 +48,6 @@ export const profileSchema = z
     docNumber: z.string().min(1, 'Номер удостоверения обязателен'),
     docIssueDate: z.date({ required_error: 'Укажите дату выдачи документа' }),
     docIssuedBy: z.string().min(1, 'Укажите, кем выдано'),
-
     isCarrier: z.boolean().default(false),
     driverLicense: z.string().optional(),
     driverCategory: z.string().optional(),

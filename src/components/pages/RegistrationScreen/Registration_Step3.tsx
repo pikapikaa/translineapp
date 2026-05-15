@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, StyleSheet, Switch, ScrollView } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -7,13 +7,14 @@ import { useNavigation } from '@react-navigation/native';
 import { textStyles } from '../../theme/textStyles';
 import { profileSchema } from '../../../utils/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAppSelector } from '../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { BaseInput } from '../../atoms/BaseInput';
 import { DropdownInput } from '../../atoms/DropdownInput';
 import { DateInput } from '../../atoms/DateInput';
 import { TranslinePressable } from '../../atoms/Pressables';
 import { palette } from '../../theme/colors';
 import Spacing from '../../atoms/Spacing';
+import { updateDraftForm } from '../../../store/slices/authSlice';
 
 interface Registration_Step_3Props {}
 
@@ -23,6 +24,7 @@ const countries = [
 ];
 const Registration_Step_3 = (props: Registration_Step_3Props) => {
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
   const { draft } = useAppSelector(state => state.auth);
   const { bottom } = useSafeAreaInsets();
 
@@ -34,20 +36,92 @@ const Registration_Step_3 = (props: Registration_Step_3Props) => {
   } = useForm({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      fullName: '',
-      citizenship: '',
+      fullName: draft?.fullName || '',
+      citizenship: draft?.citizenship || '',
       phone: draft?.phone || '',
-      iin: '',
-      docNumber: '',
-      docIssuedBy: '',
-      isCarrier: false,
-      driverLicense: '',
-      driverCategory: '',
+      iin: draft?.iin || '',
+      docNumber: draft?.docNumber || '',
+      docIssuedBy: draft?.docIssuedBy || '',
+      isCarrier: draft?.isCarrier || false,
+      driverLicense: draft?.driverLicense || '',
+      driverCategory: draft?.driverCategory || '',
+      docIssueDate: draft?.docIssueDate || '',
+      birthDate: draft?.birthDate || '',
+      driverLicenseDate: draft?.driverLicenseDate || '',
     },
     mode: 'onChange',
   });
 
   const isCarrier = watch('isCarrier');
+  const currentFullName = watch('fullName');
+  const currentCitizenship = watch('citizenship');
+  const currentIin = watch('iin');
+  const currentDocNumber = watch('docNumber');
+  const currentDocIssueDate = watch('docIssueDate');
+  const currentDocIssuedBy = watch('docIssuedBy');
+  const currentIsCarrier = watch('isCarrier');
+  const currentDriverLicense = watch('driverLicense');
+  const currentDriverCategory = watch('driverCategory');
+  const currentBirthDate = watch('birthDate');
+  const currentDriverLicenseDate = watch('driverLicenseDate');
+
+  useEffect(() => {
+    if (
+      currentFullName !== undefined ||
+      currentCitizenship !== undefined ||
+      currentIin !== undefined ||
+      currentDocNumber !== undefined ||
+      currentDocIssuedBy !== undefined ||
+      currentIsCarrier !== undefined ||
+      currentDriverLicense !== undefined ||
+      currentDriverCategory !== undefined ||
+      currentBirthDate !== undefined ||
+      currentDocIssueDate !== undefined ||
+      currentDriverLicenseDate !== undefined
+    ) {
+      const data = {
+        fullName: currentFullName,
+        citizenship: currentCitizenship,
+        iin: currentIin,
+        docNumber: currentDocNumber,
+        docIssuedBy: currentDocIssuedBy,
+        isCarrier: currentIsCarrier,
+        driverLicense: currentDriverLicense,
+        driverCategory: currentDriverCategory,
+        birthDate:
+          currentDocIssueDate instanceof Date
+            ? currentDocIssueDate.toISOString()
+            : currentDocIssueDate,
+        docIssueDate:
+          currentBirthDate instanceof Date
+            ? currentBirthDate.toISOString()
+            : currentBirthDate,
+        driverLicenseDate:
+          currentDriverLicenseDate instanceof Date
+            ? currentDriverLicenseDate.toISOString()
+            : currentDriverLicenseDate,
+      };
+
+      dispatch(
+        updateDraftForm({
+          ...data,
+        }),
+      );
+    }
+  }, [
+    currentFullName,
+    currentCitizenship,
+    currentIin,
+    currentDocNumber,
+    currentDocIssuedBy,
+    currentIsCarrier,
+    currentDriverLicense,
+    currentDriverCategory,
+    currentBirthDate,
+    currentDocIssueDate,
+    currentDriverLicenseDate,
+    dispatch,
+  ]);
 
   const onProfileSubmitHandler = () => {
     navigation.navigate('Registration_Step4');

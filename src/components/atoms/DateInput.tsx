@@ -24,7 +24,18 @@ export const DateInput: React.FC<DateInputProps> = ({
         control={control}
         name={name}
         render={({ field: { onChange, value }, fieldState: { error } }) => {
-          const dateValue = value instanceof Date ? value : null;
+          let dateValue: Date | null = value instanceof Date ? value : null;
+
+          if (
+            !dateValue &&
+            typeof value === 'string' &&
+            value.trim().length > 0
+          ) {
+            const parsedDate = new Date(value);
+            if (!isNaN(parsedDate.getTime())) {
+              dateValue = parsedDate;
+            }
+          }
           return (
             <>
               <TouchableOpacity
