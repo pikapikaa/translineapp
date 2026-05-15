@@ -5,7 +5,10 @@ import {
   TouchableOpacity,
   StyleSheet,
   ToastAndroid,
+  Platform,
+  Alert,
 } from 'react-native';
+
 import { palette } from '../theme/colors';
 import { textStyles } from '../theme/textStyles';
 
@@ -45,7 +48,12 @@ export default function ButtonTimer() {
   };
 
   const handleResend = () => {
-    ToastAndroid.show('Код отправлен повторно', ToastAndroid.SHORT);
+    if (Platform.OS === 'android') {
+      ToastAndroid.show('Код отправлен повторно', ToastAndroid.SHORT);
+    } else {
+      Alert.alert('Данные сохранены');
+    }
+
     startTimer();
   };
 

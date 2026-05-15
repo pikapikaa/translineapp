@@ -89,6 +89,9 @@ const authSlice = createSlice({
       state.draft = initialState.draft;
       AsyncStorage.removeItem('userToken');
     },
+    updateUserForm: (state, action) => {
+      state.user = { ...state.user, ...action.payload };
+    },
     updateDraftForm: (state, action) => {
       state.draft = { ...state.draft, ...action.payload };
     },
@@ -121,6 +124,11 @@ const authSlice = createSlice({
   },
 });
 
-export const { signIn, signOut, updateDraftForm, clearDraftForm } =
-  authSlice.actions;
+export const {
+  signIn,
+  signOut,
+  updateDraftForm,
+  clearDraftForm,
+  updateUserForm,
+} = authSlice.actions;
 export default authSlice.reducer;

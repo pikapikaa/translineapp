@@ -16,7 +16,7 @@ import { palette } from '../../theme/colors';
 import Spacing from '../../atoms/Spacing';
 import { updateDraftForm } from '../../../store/slices/authSlice';
 
-const countries = [
+export const countries = [
   { label: 'Казахстан', value: 'KZ' },
   { label: 'Россия', value: 'RU' },
 ];
