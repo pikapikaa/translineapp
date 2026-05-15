@@ -1,5 +1,8 @@
 {
   "welcome": "Welcome back!",
   "change_language": "Change Language",
-  "personal_account": "Transline personal account"
+  "personal_account": "Transline personal account",
+  "login_start_text": "To log in to your personal account, enter your phone number; an SMS with a verification code will be sent to it.",
+  "login": "Login",
+  "registration": "Registration"
 }

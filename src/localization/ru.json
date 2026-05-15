@@ -1,5 +1,8 @@
 {
   "welcome": "С возвращением!",
   "change_language": "Сменить язык",
-  "personal_account": "Личный кабинет Transline"
+  "personal_account": "Личный кабинет Transline",
+  "login_start_text": "Для входа в личный кабинет введите свой номер телефона, на него будет отправлено SMS с проверочным кодом",
+  "login": "Войти",
+  "registration": "Регистрация"
 }

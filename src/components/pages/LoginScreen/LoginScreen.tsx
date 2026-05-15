@@ -86,10 +86,7 @@ const LoginScreen = () => {
 
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{t('personal_account')}</Text>
-          <Text style={textStyles.text_16r}>
-            Для входа в личный кабинет введите свой номер телефона, на него
-            будет отправлено SMS с проверочным кодом
-          </Text>
+          <Text style={textStyles.text_16r}>{t('login_start_text')}</Text>
         </View>
 
         <View style={styles.spacing}>
@@ -137,7 +134,7 @@ const LoginScreen = () => {
             }}
             disabled={!isValid}
           >
-            <Text style={styles.buttonText}>Войти</Text>
+            <Text style={styles.buttonText}>{t('login')}</Text>
           </TranslinePressable>
 
           <View style={styles.register}>

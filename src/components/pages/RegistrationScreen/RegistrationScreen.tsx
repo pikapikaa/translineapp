@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
+import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 
 import Registration_Step1 from './Registration_Step1';
@@ -51,10 +51,12 @@ const RegistrationScreen = () => {
     }
   };
 
+  const { t } = useTranslation();
+
   return (
     <View style={[styles.container, { marginTop: top }]}>
       <Header
-        title="Регистрация"
+        title={t('registration')}
         onClose={() => {
           navigation.canGoBack()
             ? navigation.goBack()
