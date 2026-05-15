@@ -77,23 +77,8 @@ const authSlice = createSlice({
       state.user = { phone: action.payload.phone };
       if (action.payload.isNewUser) {
         state.user = { ...state.user, ...state.draft };
-        state.draft = {
-          phone: '',
-          fullName: '',
-          citizenship: '',
-          iin: '',
-          docNumber: '',
-          docIssuedBy: '',
-          isCarrier: false,
-          driverLicense: '',
-          driverCategory: '',
-          docIssueDate: undefined,
-          birthDate: undefined,
-          driverLicenseDate: undefined,
-          code: '',
-        };
+        state.draft = initialState.draft;
       }
-
       state.isLoading = false;
       AsyncStorage.setItem('userToken', action.payload.token);
     },
@@ -101,6 +86,7 @@ const authSlice = createSlice({
       state.userToken = null;
       state.user = null;
       state.isLoading = false;
+      state.draft = initialState.draft;
       AsyncStorage.removeItem('userToken');
     },
     updateDraftForm: (state, action) => {
