@@ -1,5 +1,5 @@
 
-# Getting Started
+# Transline App
 
 ## Step 1: Start Metro
 
