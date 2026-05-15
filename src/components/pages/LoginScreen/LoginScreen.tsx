@@ -21,14 +21,13 @@ import { textStyles } from '../../theme/textStyles';
 import DashedLine from '../../../assets/icons/DashedLine';
 import { TranslinePressable } from '../../atoms/Pressables';
 import { palette } from '../../theme/colors';
-import PasswordInput from '../../atoms/PasswordInput';
 import Spacing from '../../atoms/Spacing';
 import { PhoneInput } from '../../atoms/PhoneInput';
-import { phoneSchema } from '../../../utils/schemas';
+import { loginSchema } from '../../../utils/schemas';
 import { useNavigation } from '@react-navigation/native';
+import { EnhancedPasswordInput } from '../../atoms/EnhancedPasswordInput';
 
 const LoginScreen = () => {
-  const [password, setPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const { t } = useTranslation();
 
@@ -38,15 +37,17 @@ const LoginScreen = () => {
     control,
     handleSubmit,
     formState: { isValid },
+    getValues,
   } = useForm({
-    resolver: zodResolver(phoneSchema(false)), // true для +7
-    defaultValues: { phone: '' },
+    resolver: zodResolver(loginSchema(false)), // true для +7
+    defaultValues: { phone: '', password: '' },
   });
 
   const dispatch = useAppDispatch();
 
   const onLoginHandler = () => {
-    dispatch(signIn({ email: 'sdfsdf', token: 'sdfdsfds' }));
+    const currentPhone = getValues('phone');
+    dispatch(signIn({ token: 'sdfdsfds', phone: currentPhone }));
   };
 
   const onRegisterHandler = () => {
@@ -97,7 +98,11 @@ const LoginScreen = () => {
 
         <View style={styles.inputContainer}>
           <PhoneInput name="phone" withCountryCode={false} control={control} />
-          <PasswordInput value={password} onChangeText={setPassword} />
+          <EnhancedPasswordInput
+            name="password"
+            control={control}
+            placeholder="Пароль"
+          />
 
           <View style={styles.checkboxContainer}>
             <CheckBox

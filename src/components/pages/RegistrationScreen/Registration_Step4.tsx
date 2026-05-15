@@ -61,7 +61,7 @@ const Registration_Step_4 = () => {
     },
   ];
   const onProfileSubmitHandler = () => {
-    dispatch(signIn({ email: 'sdfsdf', token: 'sdfdsfds', isNewUser: true }));
+    dispatch(signIn({ token: 'sdfdsfds', isNewUser: true }));
   };
 
   return (

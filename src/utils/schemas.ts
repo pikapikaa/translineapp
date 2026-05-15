@@ -62,6 +62,28 @@ const driverLicenseDateSchema = z.preprocess(val => {
   return val;
 }, z.date({ required_error: 'Укажите дату выдачи ВУ' }).optional());
 
+export const loginSchema = (withCountryCode: boolean) =>
+  z.object({
+    phone: z.string().refine(
+      val => {
+        const digits = val.replace(/\D/g, '');
+        return withCountryCode ? digits.length === 11 : digits.length === 10;
+      },
+      { message: 'Неверный формат номера телефона' },
+    ),
+    password: z
+      .string()
+      .min(1, 'Пароль обязателен для заполнения')
+      .min(8, 'Пароль должен быть не менее 8 символов')
+      .regex(/[A-Z]/, 'Пароль должен содержать минимум 1 заглавную букву')
+      .regex(/[a-z]/, 'Пароль должен содержать минимум 1 строчную букву')
+      .regex(/[0-9]/, 'Пароль должен содержать минимум 1 цифру')
+      .regex(
+        /[!@#$%^&*(),.?":{}|<>_+\-[\]\\]/,
+        'Пароль должен содержать минимум 1 специальный символ',
+      ),
+  });
+
 export const profileSchema = z
   .object({
     fullName: z.string().min(1, 'ФИО обязательно для заполнения'),

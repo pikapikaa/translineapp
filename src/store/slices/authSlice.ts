@@ -5,7 +5,6 @@ interface AuthState {
   userToken: string | null;
   isLoading: boolean;
   user: {
-    email: string;
     phone?: string;
     fullName?: string;
     citizenship?: string;
@@ -68,12 +67,12 @@ const authSlice = createSlice({
       state,
       action: PayloadAction<{
         token: string;
-        email: string;
+        phone: string;
         isNewUser?: boolean;
       }>,
     ) => {
       state.userToken = action.payload.token;
-      state.user = { email: action.payload.email };
+      state.user = { phone: action.payload.phone };
       if (action.payload.isNewUser) {
         state.user = { ...state.user, ...state.draft };
         state.draft = {
