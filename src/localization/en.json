@@ -10,5 +10,14 @@
   "go_register": "Register",
   "forget_password": "Forgot password?",
   "have_questions": "Have questions?",
-  "support_phone": "Support phone:"
+  "support_phone": "Support phone:",
+  "active_orders": "Active orders",
+  "orders": "Orders",
+  "users": "Users",
+  "my_company": "My company",
+  "insurance": "Insurance",
+  "credit": "Credit",
+  "monitoring": "Monitoring",
+  "continue": "Continue",
+  "logout": "Logout"
 }

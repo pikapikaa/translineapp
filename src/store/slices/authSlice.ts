@@ -33,12 +33,14 @@ interface AuthState {
     driverLicenseDate?: Date;
     code?: string;
   };
+  sysLanguage?: string;
 }
 
 const initialState: AuthState = {
   userToken: null,
   isLoading: true,
   user: null,
+  sysLanguage: 'ru',
   draft: {
     phone: '',
     fullName: '',
@@ -95,6 +97,9 @@ const authSlice = createSlice({
     updateDraftForm: (state, action) => {
       state.draft = { ...state.draft, ...action.payload };
     },
+    setLanguage: (state, action) => {
+      state.sysLanguage = action.payload;
+    },
     clearDraftForm: state => {
       state.draft = {
         phone: '',
@@ -130,5 +135,6 @@ export const {
   updateDraftForm,
   clearDraftForm,
   updateUserForm,
+  setLanguage,
 } = authSlice.actions;
 export default authSlice.reducer;

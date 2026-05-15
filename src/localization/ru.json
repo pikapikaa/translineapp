@@ -10,5 +10,14 @@
   "go_register": "Зарегистрируйтесь",
   "forget_password": "Забыли пароль?",
   "have_questions": "Есть вопросы?",
-  "support_phone": " телефон поддержки:"
+  "support_phone": " телефон поддержки:",
+  "active_orders": "Активные заказы",
+  "orders": "Заказы",
+  "users": "Пользователи",
+  "my_company": "Моя компания",
+  "insurance": "Страхование",
+  "credit": "Кредит",
+  "monitoring": "Мониторинг",
+  "continue": "Продолжить",
+  "logout": "Выйти"
 }

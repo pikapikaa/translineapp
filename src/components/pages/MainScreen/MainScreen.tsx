@@ -8,6 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Ionicons from '@react-native-vector-icons/ionicons';
@@ -17,6 +18,8 @@ import FastImage from 'react-native-fast-image';
 import MainTile from '../../molecules/MainTile';
 import Spacing from '../../atoms/Spacing';
 import OrderCard from '../../molecules/OrderCard';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { setLanguage } from '../../../store/slices/authSlice';
 
 const images = [
   'https://thumbs.dreamstime.com/b/shop-window-sale-sign-shopping-mall-shop-window-sale-sign-shopping-mall-135775850.jpg',
@@ -26,7 +29,9 @@ const images = [
 
 const MainScreen = () => {
   const { top } = useSafeAreaInsets();
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const { sysLanguage, user } = useAppSelector(state => state.auth);
 
   const renderItem = ({ item }) => {
     return (
@@ -43,16 +48,22 @@ const MainScreen = () => {
     );
   };
 
-  const toggleLanguage = () => {
-    const nextLanguage = i18n.language === 'ru' ? 'en' : 'ru';
-    i18n.changeLanguage(nextLanguage);
+  const toggleLanguage = async () => {
+    const nextLanguage = sysLanguage === 'ru' ? 'en' : 'ru';
+    try {
+      await AsyncStorage.setItem('app_lang', nextLanguage);
+      await i18n.changeLanguage(nextLanguage);
+      dispatch(setLanguage(nextLanguage));
+    } catch (e) {
+      console.error('Ошибка сохранения языка:', e);
+    }
   };
 
   return (
     <View style={[styles.container]}>
       <ScrollView contentContainerStyle={{ paddingTop: top }}>
         <View style={styles.header}>
-          <Text style={styles.headerText}>IP Fenix</Text>
+          <Text style={styles.headerText}>{user?.phone ?? 'noname user'}</Text>
           <View style={styles.rightHeader}>
             <Text style={styles.headerText} onPress={toggleLanguage}>
               {i18n.language.toUpperCase()}
@@ -75,14 +86,14 @@ const MainScreen = () => {
 
         <View style={styles.tiles}>
           <View style={styles.tilesRow}>
-            <MainTile title="Заказы" icon="documents-outline" />
-            <MainTile title="Пользователи" icon="people-outline" />
-            <MainTile title="Моя компания" icon="briefcase-outline" />
+            <MainTile title={t('orders')} icon="documents-outline" />
+            <MainTile title={t('users')} icon="people-outline" />
+            <MainTile title={t('my_company')} icon="briefcase-outline" />
           </View>
           <View style={styles.tilesRow}>
-            <MainTile title="Страхование" icon="shield-outline" />
-            <MainTile title="Кредит" icon="card-outline" />
-            <MainTile title="Мониторинг" icon="location-outline" />
+            <MainTile title={t('insurance')} icon="shield-outline" />
+            <MainTile title={t('credit')} icon="card-outline" />
+            <MainTile title={t('monitoring')} icon="location-outline" />
           </View>
         </View>
 
@@ -90,7 +101,7 @@ const MainScreen = () => {
 
         <View style={styles.ordersContainer}>
           <View style={styles.ordersHeader}>
-            <Text style={styles.ordersTitle}>Активные заказы</Text>
+            <Text style={styles.ordersTitle}>{t('active_orders')}</Text>
           </View>
 
           <View style={styles.orderList}>

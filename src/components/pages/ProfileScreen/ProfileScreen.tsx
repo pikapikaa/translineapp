@@ -118,7 +118,7 @@ const ProfileScreen = () => {
             }}
             style={styles.exitButton}
           >
-            <Text style={textStyles.text_12l}>Выйти</Text>
+            <Text style={textStyles.text_12l}>{t('logout')}</Text>
           </Pressable>
         </View>
 
@@ -200,7 +200,7 @@ const ProfileScreen = () => {
             }}
             disabled={!isValid}
           >
-            <Text style={styles.buttonText}>Продолжить</Text>
+            <Text style={styles.buttonText}>{t('continue')}</Text>
           </TranslinePressable>
         </View>
       </ScrollView>
