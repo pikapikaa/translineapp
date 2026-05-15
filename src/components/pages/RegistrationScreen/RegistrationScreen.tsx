@@ -76,7 +76,7 @@ const RegistrationScreen = () => {
             key={`${item}`}
             style={[
               styles.sliderItem,
-              index + 1 === currenPage && styles.active,
+              index + 1 <= currenPage && styles.active,
             ]}
           />
         ))}
