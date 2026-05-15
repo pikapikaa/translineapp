@@ -16,13 +16,11 @@ import { palette } from '../../theme/colors';
 import Spacing from '../../atoms/Spacing';
 import { updateDraftForm } from '../../../store/slices/authSlice';
 
-interface Registration_Step_3Props {}
-
 const countries = [
   { label: 'Казахстан', value: 'KZ' },
   { label: 'Россия', value: 'RU' },
 ];
-const Registration_Step_3 = (props: Registration_Step_3Props) => {
+const Registration_Step_3 = () => {
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
   const { draft } = useAppSelector(state => state.auth);
@@ -88,11 +86,11 @@ const Registration_Step_3 = (props: Registration_Step_3Props) => {
         isCarrier: currentIsCarrier,
         driverLicense: currentDriverLicense,
         driverCategory: currentDriverCategory,
-        birthDate:
+        docIssueDate:
           currentDocIssueDate instanceof Date
             ? currentDocIssueDate.toISOString()
             : currentDocIssueDate,
-        docIssueDate:
+        birthDate:
           currentBirthDate instanceof Date
             ? currentBirthDate.toISOString()
             : currentBirthDate,
